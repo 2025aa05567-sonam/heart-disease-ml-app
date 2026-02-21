@@ -39,7 +39,7 @@ model_files = {
     "Random Forest": "model/random_forest.pkl"
 }
 
-uploaded_file = st.file_uploader("📂 Upload CSV File", type=["csv"])
+uploaded_file = st.file_uploader("Upload CSV File", type=["csv"])
 
 if uploaded_file is not None:
 
@@ -51,7 +51,7 @@ if uploaded_file is not None:
     # Check target column
     # -------------------------------
     if "HeartDisease" not in df.columns:
-        st.error("❌ 'HeartDisease' column missing in uploaded file.")
+        st.error("'HeartDisease' column missing in uploaded file.")
         st.stop()
 
     X = df.drop("HeartDisease", axis=1)
@@ -66,7 +66,7 @@ if uploaded_file is not None:
     # -------------------------------
     # Model Selection
     # -------------------------------
-    selected_model = st.selectbox("🔎 Select Model", list(model_files.keys()))
+    selected_model = st.selectbox("Select Model", list(model_files.keys()))
 
     try:
         model = joblib.load(model_files[selected_model])
@@ -82,7 +82,7 @@ if uploaded_file is not None:
     # -------------------------------
     # Evaluation Metrics
     # -------------------------------
-    st.subheader("📊 Evaluation Metrics")
+    st.subheader(" Evaluation Metrics")
 
     st.write("Accuracy:", round(accuracy_score(y, y_pred), 4))
     st.write("Precision:", round(precision_score(y, y_pred), 4))
@@ -100,7 +100,7 @@ if uploaded_file is not None:
     # -------------------------------
     # Confusion Matrix
     # -------------------------------
-    st.subheader("📉 Confusion Matrix")
+    st.subheader(" Confusion Matrix")
     cm = confusion_matrix(y, y_pred)
 
     fig, ax = plt.subplots()
@@ -112,5 +112,5 @@ if uploaded_file is not None:
     # -------------------------------
     # Classification Report
     # -------------------------------
-    st.subheader("📝 Classification Report")
+    st.subheader("Classification Report")
     st.text(classification_report(y, y_pred))
